@@ -1,0 +1,845 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>IELTS Writing Task 1 — Interactive Mastery</title>
+<style>
+  :root{
+    --primary:#7c3aed;      /* violet */
+    --primary-dark:#5b21b6;
+    --primary-light:#c4b5fd;
+    --accent:#ec4899;       /* pink */
+    --accent-dark:#db2777;
+    --gold:#fbbf24;         /* yellow */
+    --ink:#2a1840;
+    --muted:#7a6b8f;
+    --bg:#faf6ff;
+    --card:#ffffff;
+    --line:#ece4f7;
+    --good:#16a34a;
+    --bad:#e0533e;
+    --shadow:0 10px 30px rgba(124,58,237,.15);
+  }
+  *{box-sizing:border-box}
+  body{
+    margin:0;font-family:'Segoe UI',Tahoma,Verdana,sans-serif;
+    background:
+      radial-gradient(1200px 500px at 80% -10%, rgba(196,181,253,.30), transparent),
+      radial-gradient(900px 500px at -10% 8%, rgba(236,72,153,.12), transparent),
+      var(--bg);
+    color:var(--ink);line-height:1.55;
+  }
+  header{
+    background:linear-gradient(135deg,var(--primary),var(--accent));
+    color:#fff;padding:26px 18px 70px;position:relative;overflow:hidden;
+  }
+  header::after{
+    content:"";position:absolute;left:0;right:0;bottom:-1px;height:60px;
+    background:var(--bg);clip-path:polygon(0 60%,100% 0,100% 100%,0 100%);
+  }
+  .wrap{max-width:920px;margin:0 auto;padding:0 16px}
+  .brand{display:flex;align-items:center;gap:14px;flex-wrap:wrap}
+  .logo{width:54px;height:54px;border-radius:16px;background:rgba(255,255,255,.18);
+    display:grid;place-items:center;font-size:26px;box-shadow:inset 0 0 0 2px rgba(255,255,255,.3)}
+  header h1{margin:0;font-size:1.55rem;letter-spacing:.3px}
+  header p.sub{margin:3px 0 0;opacity:.95;font-size:.95rem}
+  .topbar{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-top:18px;flex-wrap:wrap}
+  .points{background:rgba(255,255,255,.18);border:1px solid rgba(255,255,255,.28);
+    padding:8px 14px;border-radius:999px;font-weight:700;display:flex;gap:8px;align-items:center}
+  .ar-toggle{background:var(--gold);color:#4a3500;border:none;padding:9px 16px;border-radius:999px;
+    font-weight:700;cursor:pointer;font-size:.9rem;box-shadow:0 4px 12px rgba(251,191,36,.4)}
+  .ar-toggle.on{background:#fff;color:var(--primary-dark)}
+
+  nav.tabs{max-width:920px;margin:-46px auto 0;padding:0 16px;position:relative;z-index:5}
+  .tabrow{display:flex;gap:8px;background:var(--card);padding:8px;border-radius:18px;
+    box-shadow:var(--shadow);overflow-x:auto;scrollbar-width:thin}
+  .tab{border:none;background:transparent;color:var(--muted);font-weight:700;font-size:.86rem;
+    padding:10px 14px;border-radius:12px;cursor:pointer;white-space:nowrap;transition:.18s;display:flex;gap:7px;align-items:center}
+  .tab:hover{background:#f3eefc;color:var(--ink)}
+  .tab.active{background:linear-gradient(135deg,var(--primary),var(--accent));color:#fff;box-shadow:0 6px 16px rgba(124,58,237,.35)}
+
+  main{max-width:920px;margin:22px auto 0;padding:0 16px 60px}
+  section.panel{display:none;animation:fade .35s ease}
+  section.panel.active{display:block}
+  @keyframes fade{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+
+  .card{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:22px;margin-bottom:18px;box-shadow:0 4px 16px rgba(124,58,237,.05)}
+  .card h2{margin:0 0 6px;color:var(--primary-dark);font-size:1.3rem}
+  .card h3{margin:18px 0 8px;color:var(--accent-dark);font-size:1.05rem}
+  .lead{color:var(--muted);margin:0 0 4px}
+  .pill{display:inline-block;background:#f1e9fc;color:var(--primary-dark);font-weight:700;
+    padding:3px 12px;border-radius:999px;font-size:.78rem;margin-bottom:10px}
+
+  .grid{display:grid;gap:12px}
+  .g2{grid-template-columns:repeat(auto-fit,minmax(200px,1fr))}
+  .g3{grid-template-columns:repeat(auto-fit,minmax(150px,1fr))}
+
+  .tile{border:1px solid var(--line);border-radius:14px;padding:14px;background:#fff;transition:.18s}
+  .tile:hover{transform:translateY(-3px);box-shadow:var(--shadow);border-color:var(--primary-light)}
+  .tile .ico{font-size:1.7rem}
+  .tile b{display:block;margin-top:4px;color:var(--ink)}
+  .tile small{color:var(--muted)}
+
+  .flow{display:flex;align-items:stretch;gap:10px;flex-wrap:wrap}
+  .flow .step{flex:1;min-width:140px;background:linear-gradient(135deg,#f3eefc,#fff);
+    border:1px solid var(--primary-light);border-radius:14px;padding:14px;text-align:center}
+  .flow .step .n{display:inline-grid;place-items:center;width:30px;height:30px;border-radius:50%;
+    background:var(--primary);color:#fff;font-weight:800;margin-bottom:6px}
+  .flow .arrow{align-self:center;color:var(--accent);font-size:1.4rem;font-weight:800}
+
+  .rule{display:flex;gap:12px;align-items:flex-start;padding:11px 0;border-bottom:1px dashed var(--line)}
+  .rule:last-child{border-bottom:none}
+  .rule .yn{font-weight:800;font-size:1.3rem;flex-shrink:0}
+  .yn.do{color:var(--good)} .yn.dont{color:var(--bad)}
+
+  .ar{display:none;color:var(--accent-dark);font-weight:700;direction:rtl}
+  body.show-ar .ar{display:inline}
+  .vocab-item{display:flex;justify-content:space-between;align-items:center;gap:10px;
+    padding:9px 12px;border:1px solid var(--line);border-radius:11px;background:#fff;margin-bottom:7px}
+  .vocab-item .en{font-weight:700}
+  .vocab-item .ar{font-size:.95rem}
+
+  .btn{background:linear-gradient(135deg,var(--primary),var(--primary-dark));color:#fff;border:none;
+    padding:11px 20px;border-radius:12px;font-weight:700;cursor:pointer;font-size:.95rem;transition:.15s;box-shadow:0 4px 14px rgba(124,58,237,.3)}
+  .btn:hover{filter:brightness(1.07);transform:translateY(-1px)}
+  .btn.ghost{background:#fff;color:var(--primary-dark);border:2px solid var(--primary);box-shadow:none}
+  .btn.coral{background:linear-gradient(135deg,var(--accent),var(--accent-dark));box-shadow:0 4px 14px rgba(236,72,153,.35)}
+  .btn:disabled{opacity:.5;cursor:not-allowed;transform:none}
+  .btnrow{display:flex;gap:10px;flex-wrap:wrap;margin-top:14px}
+
+  .sorter-word{font-size:1.5rem;font-weight:800;text-align:center;color:var(--primary-dark);
+    padding:16px;background:#f1e9fc;border-radius:14px;margin-bottom:6px}
+  .cat-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin-top:12px}
+  .cat-btn{padding:16px 10px;border:2px solid var(--line);border-radius:14px;background:#fff;
+    font-weight:700;cursor:pointer;transition:.15s;font-size:.95rem}
+  .cat-btn:hover{border-color:var(--primary);background:#f7f2fe}
+  .cat-btn.right{border-color:var(--good);background:#e9f9ef;animation:pop .3s}
+  .cat-btn.wrong{border-color:var(--bad);background:#fdecea;animation:shake .3s}
+  @keyframes pop{50%{transform:scale(1.06)}}
+  @keyframes shake{25%{transform:translateX(-6px)}75%{transform:translateX(6px)}}
+
+  .chip{display:inline-block;padding:8px 14px;border-radius:10px;margin:4px;font-weight:700;cursor:pointer;
+    border:2px solid transparent;transition:.15s;user-select:none}
+  .chip.connector{background:#eef0ff;color:#3a3fae;border-color:#c8cdfb}
+  .chip.time{background:#e9f9ef;color:#137a52;border-color:#abe6cb}
+  .chip.change{background:#f1e9fc;color:#5b21b6;border-color:#d6c2f7}
+  .chip.value{background:#fde7f1;color:#b1196a;border-color:#f6b8d6}
+  .chip.used{opacity:.35;pointer-events:none}
+  .chip:hover{transform:translateY(-2px)}
+  .build-slot{min-height:54px;border:2px dashed var(--line);border-radius:12px;padding:8px;background:#fafaf7;display:flex;flex-wrap:wrap;align-items:center;gap:2px}
+  .legend{display:flex;gap:14px;flex-wrap:wrap;font-size:.8rem;margin:10px 0;color:var(--muted)}
+  .legend span{display:flex;align-items:center;gap:5px}
+  .dot{width:12px;height:12px;border-radius:4px;display:inline-block}
+
+  input.txt,textarea.txt{width:100%;padding:11px 13px;border:2px solid var(--line);border-radius:11px;font-size:1rem;font-family:inherit;margin-top:6px}
+  textarea.txt{min-height:200px;resize:vertical;line-height:1.6}
+  input.txt:focus,textarea.txt:focus{outline:none;border-color:var(--primary)}
+  .feedback{margin-top:10px;padding:11px 13px;border-radius:11px;font-weight:600;display:none}
+  .feedback.show{display:block}
+  .feedback.ok{background:#e9f9ef;color:#137a52;border:1px solid #abe6cb}
+  .feedback.no{background:#fdecea;color:#b23b29;border:1px solid #f3b8ad}
+
+  .pattern-box{background:#7c3aed0a;border-left:4px solid var(--primary);border-radius:0 12px 12px 0;padding:12px 14px;margin:10px 0}
+  .pattern-box code{background:#7c3aed18;padding:2px 7px;border-radius:6px;color:var(--primary-dark);font-weight:700;font-size:.9rem}
+
+  .q{margin-bottom:18px}
+  .q .qtext{font-weight:700;margin-bottom:9px}
+  .opt{display:block;width:100%;text-align:left;padding:11px 14px;border:2px solid var(--line);
+    border-radius:11px;background:#fff;margin-bottom:8px;cursor:pointer;font-size:.95rem;font-family:inherit;transition:.12s}
+  .opt:hover{border-color:var(--primary);background:#f7f2fe}
+  .opt.sel{border-color:var(--primary);background:#f1e9fc}
+  .opt.correct{border-color:var(--good);background:#e9f9ef}
+  .opt.incorrect{border-color:var(--bad);background:#fdecea}
+  .opt:disabled{cursor:default}
+
+  .progress{height:12px;background:#eadff8;border-radius:999px;overflow:hidden;margin-top:8px}
+  .progress > i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--primary),var(--accent));transition:width .5s}
+
+  .result{text-align:center;padding:22px;border-radius:16px;background:linear-gradient(135deg,#f3eefc,#fff);border:1px solid var(--primary-light);display:none}
+  .result.show{display:block}
+  .score-num{font-size:3rem;font-weight:900;color:var(--primary-dark)}
+  .badge{display:inline-flex;flex-direction:column;align-items:center;gap:4px;background:#fff;border:2px solid var(--gold);
+    border-radius:16px;padding:12px 18px;margin:8px;box-shadow:0 6px 18px rgba(251,191,36,.3)}
+  .badge .bi{font-size:2rem}
+
+  .cert{display:none;border:6px double var(--primary);border-radius:18px;padding:26px;text-align:center;background:#fffdf8;margin-top:18px}
+  .cert.show{display:block}
+  .cert h2{font-size:1.5rem;color:var(--primary-dark);margin:.2em 0}
+  .cert .name{font-size:1.8rem;font-weight:900;color:var(--accent-dark);border-bottom:2px solid var(--gold);display:inline-block;padding:0 18px 4px;margin:6px 0}
+
+  footer{text-align:center;padding:26px 16px 40px;color:var(--muted);font-size:.85rem}
+  footer b{color:var(--primary-dark)}
+
+  .confetti{position:fixed;width:10px;height:14px;top:-20px;z-index:9999;pointer-events:none;border-radius:2px}
+  .note{font-size:.82rem;color:var(--muted);margin-top:8px}
+  table.mini{width:100%;border-collapse:collapse;margin-top:8px;font-size:.9rem}
+  table.mini th,table.mini td{border:1px solid var(--line);padding:8px 10px;text-align:left}
+  table.mini th{background:#f1e9fc;color:var(--primary-dark)}
+
+  .chartbox{border:1px solid var(--line);border-radius:14px;padding:14px;background:#fff;margin-top:8px}
+  .chartbox .cap{font-weight:700;color:var(--primary-dark);font-size:.92rem;margin-bottom:6px;text-align:center}
+  .minicharts{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;margin-top:8px}
+  .minicharts .mc{border:1px solid var(--line);border-radius:12px;padding:10px;background:#fff;text-align:center}
+  .minicharts .mc small{color:var(--muted);display:block;margin-top:4px}
+
+  .rubric{background:#f1e9fc;border:1px solid var(--primary-light);border-radius:12px;padding:14px;font-size:.95rem}
+  .rubric b{color:var(--primary-dark)}
+  .counter{font-weight:800;color:var(--bad)}
+  .counter.ok{color:var(--good)}
+  .checkitem{display:flex;align-items:center;gap:10px;padding:8px 0;cursor:pointer;font-size:.92rem}
+  .checkitem input{width:18px;height:18px;accent-color:var(--primary)}
+  .model{display:none;background:#fffdf6;border:1px solid var(--gold);border-radius:12px;padding:16px;margin-top:12px}
+  .model.show{display:block}
+  .model p{margin:0 0 10px}
+  .why{background:#f1e9fc;border-radius:10px;padding:12px;margin-top:10px;font-size:.88rem}
+  .why b{color:var(--primary-dark)}
+  @media(max-width:520px){header h1{font-size:1.3rem}.cat-grid{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap">
+    <div class="brand">
+      <div class="logo">📈</div>
+      <div>
+        <h1>IELTS Writing Task 1 — Interactive Mastery</h1>
+        <p class="sub">Describe graphs, charts, processes &amp; maps with confidence · Band 4.5 → 6.0+</p>
+      </div>
+    </div>
+    <div class="topbar">
+      <div class="points">⭐ <span id="pts">0</span> points</div>
+      <button class="ar-toggle" id="arBtn" onclick="toggleAr()">🌐 العربية: OFF</button>
+    </div>
+  </div>
+</header>
+
+<nav class="tabs">
+  <div class="tabrow" id="tabrow">
+    <button class="tab active" data-tab="start">🚀 Start Here</button>
+    <button class="tab" data-tab="words">💬 Power Words</button>
+    <button class="tab" data-tab="lab">🔧 Sentence Lab</button>
+    <button class="tab" data-tab="intro">✍️ Intro &amp; Overview</button>
+    <button class="tab" data-tab="clinic">📊 Chart Clinic</button>
+    <button class="tab" data-tab="write">📝 Write It!</button>
+    <button class="tab" data-tab="quiz">🏆 Challenge</button>
+  </div>
+</nav>
+
+<main>
+
+<!-- ===================== START HERE ===================== -->
+<section class="panel active" id="start">
+  <div class="card">
+    <span class="pill">The Big Picture</span>
+    <h2>What is Academic Task 1?</h2>
+    <p class="lead">You are given <b>one visual</b> and must describe it in your own words in <b>about 20 minutes</b>. It is a factual report — you describe what you see, you never give opinions or reasons.</p>
+    <p class="ar">تُعطى صورة واحدة (رسم بياني أو خريطة) وتصفها بكلماتك في حوالي ٢٠ دقيقة. هو تقرير حقائق فقط — لا تُبدِ رأيك.</p>
+    <h3>The 7 things you might see</h3>
+    <div class="grid g3">
+      <div class="tile"><div class="ico">📈</div><b>Line Graph</b><small>Over time → trends</small></div>
+      <div class="tile"><div class="ico">📊</div><b>Bar Chart</b><small>Compare amounts</small></div>
+      <div class="tile"><div class="ico">🥧</div><b>Pie Chart</b><small>Proportions / %</small></div>
+      <div class="tile"><div class="ico">🔢</div><b>Table</b><small>Rows of numbers</small></div>
+      <div class="tile"><div class="ico">⚙️</div><b>Process</b><small>Stages / steps</small></div>
+      <div class="tile"><div class="ico">🗺️</div><b>Map</b><small>Place &amp; change</small></div>
+      <div class="tile"><div class="ico">🧩</div><b>Two visuals</b><small>Describe both</small></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <span class="pill">Marking</span>
+    <h2>How is it graded?</h2>
+    <p class="lead">Your score is the average of <b>four equal criteria</b>:</p>
+    <table class="mini">
+      <tr><th>Criterion</th><th>In simple words</th></tr>
+      <tr><td><b>Task Achievement</b></td><td>Did you cover the task, choose the key features, and give an <b>overview</b>?</td></tr>
+      <tr><td><b>Coherence &amp; Cohesion</b></td><td>Is it organised logically with good linking?</td></tr>
+      <tr><td><b>Lexical Resource</b></td><td>Range and accuracy of your vocabulary.</td></tr>
+      <tr><td><b>Grammatical Range</b></td><td>Variety and accuracy of your sentences.</td></tr>
+    </table>
+    <p class="note">⭐ The overview is the single thing students forget most — and you <b>cannot reach Band 6</b> in Task Achievement without it.</p>
+  </div>
+
+  <div class="card">
+    <span class="pill">Your Plan</span>
+    <h2>The shape of a perfect answer</h2>
+    <div class="flow">
+      <div class="step"><span class="n">1</span><br><b>Introduction</b><br><small>Paraphrase the question</small></div>
+      <div class="arrow">→</div>
+      <div class="step"><span class="n">2</span><br><b>Overview</b><br><small>1–2 main trends, no numbers</small></div>
+      <div class="arrow">→</div>
+      <div class="step"><span class="n">3</span><br><b>Body 1</b><br><small>Group of details</small></div>
+      <div class="arrow">→</div>
+      <div class="step"><span class="n">4</span><br><b>Body 2</b><br><small>Other group of details</small></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <span class="pill">Golden Rules</span>
+    <h2>Do &amp; Don't</h2>
+    <div class="rule"><span class="yn do">✓</span><div><b>Spend only 20 minutes.</b> Task 2 is worth more — save 40 minutes for it.</div></div>
+    <div class="rule"><span class="yn do">✓</span><div><b>Write 150+ words</b> (aim for ~165). Below 150 loses marks.</div></div>
+    <div class="rule"><span class="yn do">✓</span><div><b>Plan first.</b> Spend 5 minutes choosing the key features and grouping them.</div></div>
+    <div class="rule"><span class="yn do">✓</span><div><b>Select the important data.</b> You can't describe every point — pick what stands out.</div></div>
+    <div class="rule"><span class="yn dont">✕</span><div><b>Don't copy the question.</b> Paraphrase the title.</div></div>
+    <div class="rule"><span class="yn dont">✕</span><div><b>Don't give opinions or reasons.</b> Just report the facts.</div></div>
+    <div class="rule"><span class="yn dont">✕</span><div><b>Don't repeat one sentence pattern.</b> Variety = higher score.</div></div>
+    <div class="btnrow"><button class="btn" onclick="go('words')">Next: Power Words →</button></div>
+  </div>
+</section>
+
+<!-- ===================== POWER WORDS ===================== -->
+<section class="panel" id="words">
+  <div class="card">
+    <span class="pill">Vocabulary Bank</span>
+    <h2>The Language of Change</h2>
+    <p class="lead">When a visual is <b>over time</b>, you describe movement. Turn on <b>العربية</b> at the top to see translations. Mix these — never repeat one word.</p>
+    <h3>⬆️ Going UP <span class="ar">يرتفع</span></h3>
+    <div id="vUp" class="grid g2"></div>
+    <h3>⬇️ Going DOWN <span class="ar">ينخفض</span></h3>
+    <div id="vDown" class="grid g2"></div>
+    <h3>➡️ Staying the SAME <span class="ar">يبقى ثابتاً</span></h3>
+    <div id="vStable" class="grid g2"></div>
+    <h3>〰️ UP &amp; DOWN <span class="ar">يتذبذب</span></h3>
+    <div id="vFlux" class="grid g2"></div>
+  </div>
+
+  <div class="card">
+    <span class="pill">How fast?</span>
+    <h2>Describing the speed of change</h2>
+    <p class="lead">Pair a movement word with an adverb (verb form) or an adjective (noun form).</p>
+    <div class="grid g2">
+      <div class="tile" style="border-color:#f6b8d6">
+        <b style="color:var(--accent-dark)">BIG / FAST change</b>
+        <small>dramatically · sharply · significantly · rapidly · steeply · suddenly</small>
+        <div class="ar" style="display:block;margin-top:4px">تغيّر كبير / سريع</div>
+      </div>
+      <div class="tile" style="border-color:#d6c2f7">
+        <b style="color:var(--primary-dark)">SMALL / SLOW change</b>
+        <small>gradually · steadily · slightly · slowly · minimally</small>
+        <div class="ar" style="display:block;margin-top:4px">تغيّر صغير / بطيء</div>
+      </div>
+    </div>
+    <div class="pattern-box">
+      <b>Word forms matter!</b> The adjective changes to an adverb depending on the pattern:<br>
+      <code>a dramatic rise</code> (noun phrase) ↔ <code>rose dramatically</code> (verb phrase)
+    </div>
+  </div>
+
+  <div class="card">
+    <span class="pill">🎮 Game · earn ⭐</span>
+    <h2>Sorting Challenge</h2>
+    <p class="lead">Read the word and tap the correct category. Accuracy is what counts!</p>
+    <div id="sorterStart"><div class="btnrow"><button class="btn coral" onclick="startSorter()">Start sorting ▶</button></div></div>
+    <div id="sorterGame" style="display:none">
+      <div class="sorter-word" id="sWord">—</div>
+      <div class="cat-grid">
+        <button class="cat-btn" data-cat="up" onclick="answerSort(this,'up')">⬆️ Going Up</button>
+        <button class="cat-btn" data-cat="down" onclick="answerSort(this,'down')">⬇️ Going Down</button>
+        <button class="cat-btn" data-cat="stable" onclick="answerSort(this,'stable')">➡️ Staying Same</button>
+        <button class="cat-btn" data-cat="flux" onclick="answerSort(this,'flux')">〰️ Up &amp; Down</button>
+      </div>
+      <p class="note">Word <span id="sIdx">1</span> of <span id="sTotal">12</span> · Score: <b id="sScore">0</b></p>
+    </div>
+    <div class="feedback" id="sorterDone"></div>
+  </div>
+</section>
+
+<!-- ===================== SENTENCE LAB ===================== -->
+<section class="panel" id="lab">
+  <div class="card">
+    <span class="pill">The 4 Building Blocks</span>
+    <h2>Every "change" sentence has 4 parts</h2>
+    <p class="lead">Strong sentences combine these — sometimes all four, sometimes just two or three.</p>
+    <div class="legend">
+      <span><i class="dot" style="background:#c8cdfb"></i> Connector</span>
+      <span><i class="dot" style="background:#abe6cb"></i> Time</span>
+      <span><i class="dot" style="background:#d6c2f7"></i> Change</span>
+      <span><i class="dot" style="background:#f6b8d6"></i> Value</span>
+    </div>
+    <p style="font-size:1.05rem">
+      <span class="chip connector" style="cursor:default">To begin,</span>
+      <span class="chip time" style="cursor:default">in 2010,</span>
+      <span class="chip change" style="cursor:default">the number of visitors stood at</span>
+      <span class="chip value" style="cursor:default">500.</span>
+    </p>
+  </div>
+
+  <div class="card">
+    <span class="pill">🎮 Build it · earn ⭐</span>
+    <h2>Sentence Builder</h2>
+    <p class="lead">Tap the chips in the correct order: <b>Connector → Time → Change → Value</b>.</p>
+    <div class="legend">
+      <span><i class="dot" style="background:#c8cdfb"></i> Connector</span>
+      <span><i class="dot" style="background:#abe6cb"></i> Time</span>
+      <span><i class="dot" style="background:#d6c2f7"></i> Change</span>
+      <span><i class="dot" style="background:#f6b8d6"></i> Value</span>
+    </div>
+    <div class="build-slot" id="buildSlot"></div>
+    <div id="buildBank" style="margin-top:12px"></div>
+    <div class="btnrow">
+      <button class="btn" onclick="checkBuild()">Check ✓</button>
+      <button class="btn ghost" onclick="resetBuild()">Clear</button>
+      <button class="btn ghost" onclick="nextBuild()">Next sentence →</button>
+    </div>
+    <div class="feedback" id="buildFb"></div>
+  </div>
+
+  <div class="card">
+    <span class="pill">The 3 Essential Patterns</span>
+    <h2>Say the same idea 3 ways</h2>
+    <div class="pattern-box"><b>Pattern 1:</b> <code>There + was + a + adjective + noun + in + the…</code><br>
+      <i>There was a steady rise in the price of oil in 2015.</i></div>
+    <div class="pattern-box"><b>Pattern 2:</b> <code>Noun + verb + adverb</code><br>
+      <i>The price of oil rose steadily in 2015.</i></div>
+    <div class="pattern-box"><b>Pattern 3:</b> <code>Time + saw / witnessed + adjective + noun + in…</code><br>
+      <i>2015 saw a steady rise in the price of oil.</i> &nbsp;<small>(no "in" before the time!)</small></div>
+  </div>
+
+  <div class="card">
+    <span class="pill">🎮 Transform · earn ⭐</span>
+    <h2>Pattern Switcher</h2>
+    <p class="lead">Rewrite the sentence using the requested pattern. Spelling and word order count!</p>
+    <div id="transformBox"></div>
+    <input class="txt" id="transformInput" placeholder="Type your sentence here…">
+    <div class="btnrow">
+      <button class="btn" onclick="checkTransform()">Check ✓</button>
+      <button class="btn ghost" onclick="revealTransform()">Show answer</button>
+      <button class="btn ghost" onclick="nextTransform()">Next →</button>
+    </div>
+    <div class="feedback" id="transformFb"></div>
+  </div>
+</section>
+
+<!-- ===================== INTRO & OVERVIEW ===================== -->
+<section class="panel" id="intro">
+  <div class="card">
+    <span class="pill">Sentence 1</span>
+    <h2>The Introduction = Paraphrase the title</h2>
+    <p class="lead">Never copy the question. Change it in three ways:</p>
+    <div class="grid g3">
+      <div class="tile"><div class="ico">🔁</div><b>Synonyms</b><small>shows → illustrates</small></div>
+      <div class="tile"><div class="ico">🧱</div><b>Word forms</b><small>produced → production</small></div>
+      <div class="tile"><div class="ico">↔️</div><b>Word order</b><small>rearrange the phrases</small></div>
+    </div>
+    <h3>Useful opening verbs</h3>
+    <p>The graph / chart <b>illustrates · compares · gives information about · presents</b> …</p>
+    <table class="mini">
+      <tr><th>Question says…</th><th>You write…</th></tr>
+      <tr><td>The graph shows</td><td>The line graph illustrates</td></tr>
+      <tr><td>energy that was produced from coal</td><td>the production of energy from coal</td></tr>
+      <tr><td>in four countries</td><td>in Spain, Italy, Greece and Poland</td></tr>
+      <tr><td>from 1995 to 2010</td><td>between 1995 and 2010</td></tr>
+    </table>
+  </div>
+
+  <div class="card">
+    <span class="pill">🎮 Match · earn ⭐</span>
+    <h2>Synonym Match</h2>
+    <p class="lead">Tap the best paraphrase for each underlined word.</p>
+    <div id="synBox"></div>
+  </div>
+
+  <div class="card">
+    <span class="pill">Sentence 2</span>
+    <h2>The Overview = the big picture, no numbers</h2>
+    <p class="lead">Step back and describe the visual like a <b>picture</b>. What is the 1–2 main trend? Use no exact figures here.</p>
+    <div class="pattern-box">Start with: <i>Overall, it can be seen that…</i> · <i>It is noticeable that…</i> · <i>In general,…</i></div>
+    <h3>Example overview (my own wording)</h3>
+    <p><i>"Overall, sales rose in all three regions over the period, with the North recording the most striking increase."</i> — notice: a clear trend, a comparison, and <b>no precise numbers</b>.</p>
+    <div class="feedback ok show" style="background:#fff7e6;border-color:var(--gold);color:#7a5b00">
+      💡 Tip: write the overview <b>after the introduction</b>. If you run out of time and skip it, you cannot reach Band 6.
+    </div>
+  </div>
+</section>
+
+<!-- ===================== CHART CLINIC ===================== -->
+<section class="panel" id="clinic">
+  <div class="card">
+    <span class="pill">See it first</span>
+    <h2>The three most common visuals</h2>
+    <div class="minicharts">
+      <div class="mc" id="miniLine"></div>
+      <div class="mc" id="miniBar"></div>
+      <div class="mc" id="miniPie"></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <span class="pill">Quick Guide</span>
+    <h2>Which language for which visual?</h2>
+    <p class="lead">First ask: <b>Is there a time frame?</b> If yes → language of change. If no → comparison only.</p>
+    <table class="mini">
+      <tr><th>Visual</th><th>Time?</th><th>Language</th><th>Key tip</th></tr>
+      <tr><td>📈 Line</td><td>Always</td><td>Change + compare</td><td>Group lines by similar pattern</td></tr>
+      <tr><td>📊 Bar</td><td>Sometimes</td><td>Compare (change if dated)</td><td>Check for dates first!</td></tr>
+      <tr><td>🥧 Pie</td><td>Sometimes</td><td>%, fractions, proportions</td><td>Start with the biggest slice</td></tr>
+      <tr><td>🔢 Table</td><td>Sometimes</td><td>Same as line/bar</td><td>Scan for high/low patterns</td></tr>
+      <tr><td>⚙️ Process</td><td>No</td><td>Passive + time linkers</td><td>Describe <b>every</b> stage in order</td></tr>
+      <tr><td>🗺️ Map</td><td>Usually</td><td>Location + change</td><td>Group by area or by feature</td></tr>
+    </table>
+  </div>
+
+  <div class="card">
+    <span class="pill">🥧 Pie Charts</span>
+    <h2>Fraction ↔ Percentage</h2>
+    <p class="lead">Pie charts love variety: swap between %, fractions and qualifiers like "just over" / "nearly".</p>
+    <div id="fracBox"></div>
+  </div>
+
+  <div class="card">
+    <span class="pill">⚙️ Process Diagrams</span>
+    <h2>Use the passive voice</h2>
+    <p class="lead">In a process we care about <b>what happens</b>, not who does it → present simple passive.</p>
+    <div class="pattern-box">Active: <i>Someone <b>collects</b> the beans.</i><br>Passive: <i>The beans <b>are collected</b>.</i> ✅</div>
+    <h3>Time linkers to join your stages</h3>
+    <p><b>First · Next · After that · Following this · Then · Subsequently · Finally</b><br>
+       Complex: <i>Once the milk has been heated…</i> · <i>After being packed, the goods are shipped.</i> · <i>Having been dried, the leaves are sorted.</i></p>
+    <h3>Quick check: make it passive</h3>
+    <div id="passiveBox"></div>
+  </div>
+
+  <div class="card">
+    <span class="pill">🗺️ Maps</span>
+    <h2>Language of location</h2>
+    <div class="grid g2">
+      <div class="tile"><b>Position</b><small>in front of · opposite · next to · beside · behind · between · alongside · to the left/right of</small></div>
+      <div class="tile"><b>Compass</b><small>in the north · to the east · in the south-west · on the west side · from west to east</small></div>
+    </div>
+    <h3>Language of change for maps</h3>
+    <p>An airport <b>was built</b> · the houses <b>were replaced by</b> apartments · the forest <b>was cleared to make way for</b> a factory · the road <b>was extended</b>.</p>
+    <div class="feedback ok show" style="background:#fff7e6;border-color:var(--gold);color:#7a5b00">
+      💡 Group your map answer by <b>area</b> (north vs south) or by <b>feature</b> (transport, housing, business) — whichever is clearer.
+    </div>
+  </div>
+</section>
+
+<!-- ===================== WRITE IT! ===================== -->
+<section class="panel" id="write">
+  <div class="card">
+    <span class="pill">Put it together</span>
+    <h2>Real Writing Practice</h2>
+    <p class="lead">Now write a full answer. Choose a task, study the graph, and write <b>150+ words</b> in about 20 minutes. When you're done, unlock a model answer to compare.</p>
+    <div class="btnrow">
+      <button class="btn" id="taskA" onclick="showTask('A')">📈 Task 1 — Line graph</button>
+      <button class="btn ghost" id="taskB" onclick="showTask('B')">📊 Task 2 — Bar chart</button>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="rubric" id="rubric"></div>
+    <div class="chartbox" id="taskChart"></div>
+
+    <h3>Before you write — your checklist</h3>
+    <label class="checkitem"><input type="checkbox"> I paraphrased the title (Introduction)</label>
+    <label class="checkitem"><input type="checkbox"> I wrote an Overview (main trend, no numbers)</label>
+    <label class="checkitem"><input type="checkbox"> I grouped the details into 2 body paragraphs</label>
+    <label class="checkitem"><input type="checkbox"> I used a mix of change / comparison language</label>
+    <label class="checkitem"><input type="checkbox"> I gave NO opinions or reasons</label>
+
+    <h3>Your answer</h3>
+    <textarea class="txt" id="essay" placeholder="Start with: The line graph illustrates…" oninput="countWords()"></textarea>
+    <p class="note">Word count: <span class="counter" id="wc">0</span> / 150 minimum</p>
+
+    <div class="btnrow">
+      <button class="btn coral" onclick="finishWriting()">✅ I'm done — show me a model</button>
+      <button class="btn ghost" onclick="clearEssay()">Clear my answer</button>
+    </div>
+    <div class="feedback" id="writeFb"></div>
+
+    <div class="model" id="modelBox"></div>
+  </div>
+</section>
+
+<!-- ===================== CHALLENGE QUIZ ===================== -->
+<section class="panel" id="quiz">
+  <div class="card">
+    <span class="pill">🏆 Final Challenge</span>
+    <h2>Task 1 Mastery Quiz</h2>
+    <p class="lead">16 questions covering everything. Score <b>80%+</b> to earn your certificate. Good luck!</p>
+    <div class="progress"><i id="quizBar"></i></div>
+    <div id="quizBox" style="margin-top:18px"></div>
+    <div class="btnrow">
+      <button class="btn coral" id="submitQuiz" onclick="submitQuiz()">Submit my answers</button>
+      <button class="btn ghost" onclick="resetQuiz()">Reset quiz</button>
+    </div>
+    <div class="result" id="quizResult">
+      <div class="score-num" id="scoreNum">0%</div>
+      <p id="scoreMsg" style="font-weight:700;margin:4px 0 12px"></p>
+      <div id="badges"></div>
+      <div id="certArea" style="margin-top:14px"></div>
+    </div>
+    <div class="cert" id="cert">
+      <div style="font-size:2rem">🎓</div>
+      <h2>Certificate of Achievement</h2>
+      <p style="margin:4px 0;color:var(--muted)">This certifies that</p>
+      <div class="name" id="certName">Student</div>
+      <p style="margin:8px 0;color:var(--muted)">has successfully mastered<br><b>IELTS Academic Writing Task 1</b></p>
+      <p id="certScore" style="font-weight:800;color:var(--primary-dark)"></p>
+    </div>
+  </div>
+
+  <div class="card">
+    <span class="pill">Save your work</span>
+    <h2>Progress &amp; Certificate</h2>
+    <p class="lead">Download a small file to keep your points, or load it later to continue.</p>
+    <div class="btnrow">
+      <button class="btn" onclick="saveProgress()">💾 Save progress (.json)</button>
+      <button class="btn ghost" onclick="document.getElementById('loadFile').click()">📂 Load progress</button>
+      <input type="file" id="loadFile" accept=".json" style="display:none" onchange="loadProgress(event)">
+      <button class="btn ghost" onclick="window.print()">🖨️ Print certificate</button>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <p>🎯 You've got this — practise a little every day and Band 6 is within reach.</p>
+  <p>Designed by: <b>Nazila Motahari</b></p>
+</footer>
+
+<script>
+/* ---------------- STATE ---------------- */
+let state = { points:0, name:'', arabic:false };
+const $ = id => document.getElementById(id);
+function addPoints(n){ state.points += n; $('pts').textContent = state.points; }
+
+/* ---------------- NAV ---------------- */
+document.querySelectorAll('.tab').forEach(t=>t.addEventListener('click',()=>go(t.dataset.tab)));
+function go(id){
+  document.querySelectorAll('.tab').forEach(t=>t.classList.toggle('active',t.dataset.tab===id));
+  document.querySelectorAll('.panel').forEach(p=>p.classList.toggle('active',p.id===id));
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+function toggleAr(){
+  state.arabic=!state.arabic;
+  document.body.classList.toggle('show-ar',state.arabic);
+  $('arBtn').textContent='🌐 العربية: '+(state.arabic?'ON':'OFF');
+  $('arBtn').classList.toggle('on',state.arabic);
+}
+
+/* ---------------- VOCAB ---------------- */
+const VOCAB = {
+  up:[{en:'rise',ar:'يرتفع'},{en:'increase',ar:'يزداد'},{en:'grow',ar:'ينمو'},{en:'climb',ar:'يصعد'},{en:'soar',ar:'يرتفع بشدّة'},{en:'surge',ar:'يتصاعد'}],
+  down:[{en:'fall',ar:'ينخفض'},{en:'decline',ar:'يتراجع'},{en:'drop',ar:'يهبط'},{en:'decrease',ar:'يقلّ'},{en:'plunge',ar:'يهوي بشدّة'},{en:'dip',ar:'ينخفض قليلاً'}],
+  stable:[{en:'remain stable',ar:'يبقى مستقراً'},{en:'level off',ar:'يستقرّ'},{en:'plateau',ar:'يثبت عند مستوى'},{en:'stay constant',ar:'يبقى ثابتاً'}],
+  flux:[{en:'fluctuate',ar:'يتذبذب'},{en:'vary',ar:'يتباين'},{en:'go up and down',ar:'يرتفع وينخفض'}]
+};
+function renderVocab(){
+  const map={up:'vUp',down:'vDown',stable:'vStable',flux:'vFlux'};
+  for(const k in map){ $(map[k]).innerHTML=VOCAB[k].map(w=>`<div class="vocab-item"><span class="en">${w.en}</span><span class="ar">${w.ar}</span></div>`).join(''); }
+}
+renderVocab();
+
+/* ---------------- SORTER ---------------- */
+let sortDeck=[],sortPos=0,sortScore=0;
+function buildDeck(){let d=[];for(const cat in VOCAB){VOCAB[cat].forEach(w=>d.push({word:w.en,cat}));}for(let i=d.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[d[i],d[j]]=[d[j],d[i]];}return d.slice(0,12);}
+function startSorter(){sortDeck=buildDeck();sortPos=0;sortScore=0;$('sorterStart').style.display='none';$('sorterGame').style.display='block';$('sorterDone').classList.remove('show');$('sTotal').textContent=sortDeck.length;showSortWord();}
+function showSortWord(){document.querySelectorAll('.cat-btn').forEach(b=>{b.classList.remove('right','wrong');b.disabled=false;});$('sWord').textContent=sortDeck[sortPos].word;$('sIdx').textContent=sortPos+1;$('sScore').textContent=sortScore;}
+function answerSort(btn,cat){document.querySelectorAll('.cat-btn').forEach(b=>b.disabled=true);const correct=sortDeck[sortPos].cat;if(cat===correct){btn.classList.add('right');sortScore++;addPoints(5);}else{btn.classList.add('wrong');document.querySelector('.cat-btn[data-cat="'+correct+'"]').classList.add('right');}$('sScore').textContent=sortScore;setTimeout(()=>{sortPos++;if(sortPos>=sortDeck.length)endSorter();else showSortWord();},800);}
+function endSorter(){$('sorterGame').style.display='none';$('sorterStart').style.display='block';const fb=$('sorterDone');fb.className='feedback show '+(sortScore>=10?'ok':'no');fb.innerHTML='🎉 You scored <b>'+sortScore+'/12</b> · earned <b>'+sortScore*5+' ⭐</b>. '+(sortScore>=10?'Excellent!':'Try again to improve!');if(sortScore===12)burst();}
+
+/* ---------------- BUILDER ---------------- */
+const BUILDS=[
+  [{t:'connector',x:'To begin,'},{t:'time',x:'in 2010,'},{t:'change',x:'the number of visitors stood at'},{t:'value',x:'500.'}],
+  [{t:'connector',x:'However,'},{t:'time',x:'over the next decade,'},{t:'change',x:'the figure climbed steadily to'},{t:'value',x:'2,400.'}],
+  [{t:'connector',x:'Finally,'},{t:'time',x:'in 2022,'},{t:'change',x:'sales plunged to a low of'},{t:'value',x:'just 80.'}],
+  [{t:'connector',x:'Next,'},{t:'time',x:'between 2015 and 2018,'},{t:'change',x:'the price levelled off at'},{t:'value',x:'around $30.'}]
+];
+let buildIdx=0,buildPlaced=[];
+function loadBuild(){buildPlaced=[];const parts=BUILDS[buildIdx];const sh=parts.map((p,i)=>({...p,id:i}));for(let i=sh.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[sh[i],sh[j]]=[sh[j],sh[i]];}$('buildBank').innerHTML=sh.map(p=>'<span class="chip '+p.t+'" data-id="'+p.id+'" onclick="placeChip('+p.id+')">'+p.x+'</span>').join('');$('buildSlot').innerHTML='';$('buildFb').classList.remove('show');}
+function placeChip(id){const part=BUILDS[buildIdx][id];buildPlaced.push(id);$('buildSlot').insertAdjacentHTML('beforeend','<span class="chip '+part.t+'">'+part.x+'</span>');document.querySelector('#buildBank .chip[data-id="'+id+'"]').classList.add('used');}
+function resetBuild(){loadBuild();}
+function nextBuild(){buildIdx=(buildIdx+1)%BUILDS.length;loadBuild();}
+function checkBuild(){const fb=$('buildFb');const correct=BUILDS[buildIdx].map((p,i)=>i);const ok=buildPlaced.length===correct.length&&buildPlaced.every((v,i)=>v===correct[i]);if(ok){fb.className='feedback show ok';fb.innerHTML='✅ Perfect order: Connector → Time → Change → Value. <b>+10 ⭐</b>';addPoints(10);burst();}else{fb.className='feedback show no';fb.innerHTML='❌ Not quite. Remember: <b>Connector → Time → Change → Value</b>. Clear and try again.';}}
+
+/* ---------------- TRANSFORM ---------------- */
+const TRANSFORMS=[
+  {base:'The price of oil rose steadily in 2015.',ask:'Rewrite using Pattern 1 (There was…):',answers:['there was a steady rise in the price of oil in 2015']},
+  {base:'Tourist numbers fell sharply during winter.',ask:'Rewrite using Pattern 3 (Time saw…):',answers:['winter saw a sharp fall in tourist numbers']},
+  {base:'There was a gradual increase in sales last year.',ask:'Rewrite using Pattern 2 (Noun + verb + adverb):',answers:['sales increased gradually last year','sales rose gradually last year']},
+  {base:'Rainfall dropped dramatically in August.',ask:'Rewrite using Pattern 1 (There was…):',answers:['there was a dramatic drop in rainfall in august','there was a dramatic fall in rainfall in august']}
+];
+let tIdx=0;
+function loadTransform(){const t=TRANSFORMS[tIdx];$('transformBox').innerHTML='<p style="margin:0 0 4px"><b>Base:</b> <i>'+t.base+'</i></p><p style="margin:0;color:var(--accent-dark);font-weight:700">'+t.ask+'</p>';$('transformInput').value='';$('transformFb').classList.remove('show');}
+function norm(s){return s.toLowerCase().replace(/[.,]/g,'').replace(/\s+/g,' ').trim();}
+function checkTransform(){const fb=$('transformFb');const val=norm($('transformInput').value);const ok=TRANSFORMS[tIdx].answers.some(a=>norm(a)===val);if(ok){fb.className='feedback show ok';fb.innerHTML='✅ Brilliant — correct transformation! <b>+10 ⭐</b>';addPoints(10);}else{fb.className='feedback show no';fb.innerHTML='❌ Close! Check word forms and order, or tap <b>Show answer</b>.';}}
+function revealTransform(){const fb=$('transformFb');fb.className='feedback show ok';fb.innerHTML='💡 Model: <i>'+TRANSFORMS[tIdx].answers[0].replace(/^./,c=>c.toUpperCase())+'.</i>';}
+function nextTransform(){tIdx=(tIdx+1)%TRANSFORMS.length;loadTransform();}
+
+/* ---------------- SYNONYM MATCH ---------------- */
+const SYNS=[
+  {word:'The graph <u>shows</u>…',opts:['illustrates','explains','agrees'],correct:0},
+  {word:'amount <u>produced</u>',opts:['the producer','the production of','producing nicely'],correct:1},
+  {word:'<u>from</u> 1990 <u>to</u> 2000',opts:['since 1990','between 1990 and 2000','about 1990'],correct:1},
+  {word:'four <u>countries</u>',opts:['Spain, Italy, Greece, Poland','many places','some lands'],correct:0}
+];
+function renderSyn(){$('synBox').innerHTML=SYNS.map((s,i)=>'<div class="q" id="syn'+i+'"><div class="qtext">'+s.word+'</div>'+s.opts.map((o,j)=>'<button class="opt" onclick="answerSyn('+i+','+j+')">'+o+'</button>').join('')+'</div>').join('');}
+function answerSyn(i,j){const b=$('syn'+i);if(b.dataset.done)return;b.dataset.done='1';const opts=b.querySelectorAll('.opt');opts.forEach(o=>o.disabled=true);if(j===SYNS[i].correct){opts[j].classList.add('correct');addPoints(5);}else{opts[j].classList.add('incorrect');opts[SYNS[i].correct].classList.add('correct');}}
+renderSyn();
+
+/* ---------------- FRACTION MATCH ---------------- */
+const FRACS=[
+  {p:'50%',opts:['half','a third','three-quarters'],correct:0},
+  {p:'25%',opts:['a fifth','a quarter','half'],correct:1},
+  {p:'75%',opts:['three-quarters','two-thirds','a third'],correct:0},
+  {p:'33%',opts:['a quarter','a third','a fifth'],correct:1},
+  {p:'20%',opts:['a tenth','a fifth','a quarter'],correct:1}
+];
+function renderFrac(){$('fracBox').innerHTML=FRACS.map((f,i)=>'<div class="q" id="frac'+i+'"><div class="qtext">'+f.p+' is roughly…</div>'+f.opts.map((o,j)=>'<button class="opt" onclick="answerFrac('+i+','+j+')">'+o+'</button>').join('')+'</div>').join('');}
+function answerFrac(i,j){const b=$('frac'+i);if(b.dataset.done)return;b.dataset.done='1';const opts=b.querySelectorAll('.opt');opts.forEach(o=>o.disabled=true);if(j===FRACS[i].correct){opts[j].classList.add('correct');addPoints(5);}else{opts[j].classList.add('incorrect');opts[FRACS[i].correct].classList.add('correct');}}
+renderFrac();
+
+/* ---------------- PASSIVE ---------------- */
+const PASSIVE=[
+  {active:'The worker collects the beans.',answers:['the beans are collected']},
+  {active:'A machine packs the boxes.',answers:['the boxes are packed']},
+  {active:'They heat the milk.',answers:['the milk is heated']}
+];
+let pIdx=0;
+function renderPassive(){$('passiveBox').innerHTML='<p style="margin:0 0 4px"><b>Active:</b> <i>'+PASSIVE[pIdx].active+'</i></p><input class="txt" id="passiveInput" placeholder="Write the passive form…"><div class="btnrow"><button class="btn" onclick="checkPassive()">Check ✓</button><button class="btn ghost" onclick="nextPassive()">Next →</button></div><div class="feedback" id="passiveFb"></div>';}
+function checkPassive(){const fb=$('passiveFb');const val=norm($('passiveInput').value);const ok=PASSIVE[pIdx].answers.some(a=>norm(a)===val);if(ok){fb.className='feedback show ok';fb.innerHTML='✅ Correct passive! <b>+5 ⭐</b>';addPoints(5);}else{fb.className='feedback show no';fb.innerHTML='❌ Try: object + am/is/are + past participle. e.g. <i>'+PASSIVE[pIdx].answers[0].replace(/^./,c=>c.toUpperCase())+'.</i>';}}
+function nextPassive(){pIdx=(pIdx+1)%PASSIVE.length;renderPassive();}
+
+/* ================= SVG CHART GENERATORS ================= */
+const LINE_DATA={
+  years:['2000','2005','2010','2015','2020'],
+  series:[
+    {name:'Country A',color:'#7c3aed',vals:[20,45,65,80,90]},
+    {name:'Country B',color:'#ec4899',vals:[10,25,50,70,85]},
+    {name:'Country C',color:'#f59e0b',vals:[5,15,30,55,75]}
+  ]
+};
+function lineSVG(){
+  const d=LINE_DATA,L=45,R=15,T=30,B=42,W=480,H=300,pw=W-L-R,ph=H-T-B;
+  const x=i=>L+i*(pw/(d.years.length-1)), y=v=>T+ph-(v/100)*ph;
+  let grid='';for(let g=0;g<=100;g+=20){const yy=y(g);grid+='<line x1="'+L+'" y1="'+yy+'" x2="'+(W-R)+'" y2="'+yy+'" stroke="#ece4f7"/><text x="'+(L-6)+'" y="'+(yy+4)+'" font-size="10" fill="#7a6b8f" text-anchor="end">'+g+'%</text>';}
+  let xlab='';d.years.forEach((yr,i)=>xlab+='<text x="'+x(i)+'" y="'+(H-B+16)+'" font-size="10" fill="#7a6b8f" text-anchor="middle">'+yr+'</text>');
+  let lines='';d.series.forEach(s=>{const pts=s.vals.map((v,i)=>x(i)+','+y(v)).join(' ');lines+='<polyline points="'+pts+'" fill="none" stroke="'+s.color+'" stroke-width="2.6" stroke-linejoin="round"/>';s.vals.forEach((v,i)=>lines+='<circle cx="'+x(i)+'" cy="'+y(v)+'" r="3.4" fill="'+s.color+'"/>');});
+  let leg='';d.series.forEach((s,i)=>leg+='<rect x="'+(L+i*120)+'" y="6" width="10" height="10" rx="2" fill="'+s.color+'"/><text x="'+(L+i*120+15)+'" y="15" font-size="10" fill="#2a1840">'+s.name+'</text>');
+  return '<svg viewBox="0 0 '+W+' '+H+'" width="100%" role="img">'+grid+'<line x1="'+L+'" y1="'+T+'" x2="'+L+'" y2="'+(T+ph)+'" stroke="#b9a8d6"/><line x1="'+L+'" y1="'+(T+ph)+'" x2="'+(W-R)+'" y2="'+(T+ph)+'" stroke="#b9a8d6"/>'+lines+xlab+leg+'</svg>';
+}
+const BAR_DATA={
+  groups:['Exercise','Cooking','Gaming'],
+  series:[{name:'Men',color:'#7c3aed',vals:[5,3,8]},{name:'Women',color:'#ec4899',vals:[4,7,2]}],
+  max:10
+};
+function barSVG(){
+  const d=BAR_DATA,L=42,R=15,T=30,B=42,W=480,H=300,pw=W-L-R,ph=H-T-B,bw=24,gap=4;
+  const y=v=>T+ph-(v/d.max)*ph;
+  let grid='';for(let g=0;g<=d.max;g+=2){const yy=y(g);grid+='<line x1="'+L+'" y1="'+yy+'" x2="'+(W-R)+'" y2="'+yy+'" stroke="#ece4f7"/><text x="'+(L-6)+'" y="'+(yy+4)+'" font-size="10" fill="#7a6b8f" text-anchor="end">'+g+'</text>';}
+  let bars='',xlab='';const gw=pw/d.groups.length;
+  d.groups.forEach((gname,i)=>{const cx=L+(i+0.5)*gw;d.series.forEach((s,k)=>{const bx=cx-(bw+gap/2)+k*(bw+gap);const h=(s.vals[i]/d.max)*ph;bars+='<rect x="'+bx.toFixed(1)+'" y="'+y(s.vals[i]).toFixed(1)+'" width="'+bw+'" height="'+h.toFixed(1)+'" rx="3" fill="'+s.color+'"/>';});xlab+='<text x="'+cx.toFixed(1)+'" y="'+(H-B+16)+'" font-size="10" fill="#7a6b8f" text-anchor="middle">'+gname+'</text>';});
+  let leg='';d.series.forEach((s,i)=>leg+='<rect x="'+(L+i*70)+'" y="6" width="10" height="10" rx="2" fill="'+s.color+'"/><text x="'+(L+i*70+15)+'" y="15" font-size="10" fill="#2a1840">'+s.name+'</text>');
+  return '<svg viewBox="0 0 '+W+' '+H+'" width="100%" role="img">'+grid+'<line x1="'+L+'" y1="'+(T+ph)+'" x2="'+(W-R)+'" y2="'+(T+ph)+'" stroke="#b9a8d6"/>'+bars+xlab+leg+'</svg>';
+}
+function pieSVG(small){
+  const data=[{l:'Maths',v:40,c:'#7c3aed'},{l:'Science',v:30,c:'#ec4899'},{l:'Arts',v:20,c:'#f59e0b'},{l:'Sport',v:10,c:'#a78bfa'}];
+  const cx=70,cy=72,r=58;let ang=-90,paths='';
+  data.forEach(d=>{const sweep=d.v/100*360;const a0=ang*Math.PI/180,a1=(ang+sweep)*Math.PI/180;const x0=cx+r*Math.cos(a0),y0=cy+r*Math.sin(a0),x1=cx+r*Math.cos(a1),y1=cy+r*Math.sin(a1);const lg=sweep>180?1:0;paths+='<path d="M'+cx+','+cy+' L'+x0.toFixed(1)+','+y0.toFixed(1)+' A'+r+','+r+' 0 '+lg+' 1 '+x1.toFixed(1)+','+y1.toFixed(1)+' Z" fill="'+d.c+'" stroke="#fff" stroke-width="2"/>';const mid=(ang+sweep/2)*Math.PI/180,lx=cx+(r*0.6)*Math.cos(mid),ly=cy+(r*0.6)*Math.sin(mid);paths+='<text x="'+lx.toFixed(1)+'" y="'+(ly+3).toFixed(1)+'" font-size="11" fill="#fff" font-weight="700" text-anchor="middle">'+d.v+'%</text>';ang+=sweep;});
+  let leg='';data.forEach((d,i)=>leg+='<rect x="150" y="'+(18+i*22)+'" width="11" height="11" rx="2" fill="'+d.c+'"/><text x="167" y="'+(28+i*22)+'" font-size="10" fill="#2a1840">'+d.l+'</text>');
+  return '<svg viewBox="0 0 230 150" width="100%" role="img">'+paths+leg+'</svg>';
+}
+function renderMiniCharts(){
+  $('miniLine').innerHTML=lineSVG()+'<small>📈 Line — over time</small>';
+  $('miniBar').innerHTML=barSVG()+'<small>📊 Bar — comparison</small>';
+  $('miniPie').innerHTML=pieSVG()+'<small>🥧 Pie — proportions</small>';
+}
+
+/* ================= WRITE IT! ================= */
+const TASKS={
+  A:{
+    title:'Task A — Line Graph',
+    rubric:'<b>You should spend about 20 minutes on this task.</b><br><br>The line graph below shows the <b>percentage of households with internet access</b> in three countries (A, B and C) between <b>2000 and 2020</b>.<br><br>Summarise the information by selecting and reporting the main features, and make comparisons where relevant. Write at least 150 words.',
+    chart:()=> '<div class="cap">Households with internet access (%), 2000–2020</div>'+lineSVG(),
+    model:'The line graph illustrates the percentage of households with access to the internet in three countries, labelled A, B and C, between 2000 and 2020.\n\nOverall, internet access grew substantially in all three countries over the two decades. Country A consistently recorded the highest level of access, while Country C remained the lowest throughout the period.\n\nIn 2000, only 20% of households in Country A were connected, but this figure climbed steadily to reach 65% by 2010 before levelling off at 90% in 2020. Country B followed a similar upward trend, starting at just 10% and rising sharply to 70% in 2015, finishing the period at 85%.\n\nCountry C, by contrast, began with the lowest figure at only 5%. Although its growth was gradual in the early years, access then increased rapidly, climbing from 30% in 2010 to 75% by 2020. Despite this, it stayed below the other two countries for the entire period.',
+    why:['<b>Intro</b> paraphrases the title (<i>shows → illustrates</i>, <i>access → access to the internet</i>).','<b>Overview</b> gives the big trend (all rose) + a comparison, with NO numbers.','<b>Two body paragraphs</b> group the countries logically (A &amp; B together, then C).','Rich change language: <i>climbed steadily, rising sharply, levelled off, increased rapidly</i>.']
+  },
+  B:{
+    title:'Task B — Bar Chart',
+    rubric:'<b>You should spend about 20 minutes on this task.</b><br><br>The bar chart below shows the <b>average number of hours per week</b> that men and women spent on three activities: <b>exercise, cooking and gaming</b>.<br><br>Summarise the information by selecting and reporting the main features, and make comparisons where relevant. Write at least 150 words.',
+    chart:()=> '<div class="cap">Average hours per week, by activity</div>'+barSVG(),
+    model:'The bar chart compares the average number of hours per week that men and women spent on three activities: exercise, cooking and gaming.\n\nOverall, it is clear that men devoted far more time to gaming, whereas women spent considerably longer cooking. The two groups were fairly similar when it came to exercise.\n\nLooking first at the activities dominated by men, gaming stood out sharply: men played for eight hours a week, four times the figure for women, who spent only two hours. Men also exercised slightly more than women, at five hours compared with four.\n\nWomen, on the other hand, spent much more time cooking. They cooked for seven hours per week, more than double the three hours recorded for men. This was the activity on which women spent the most time overall.\n\nIn summary, the figures reveal clear differences between the two groups, with gaming and cooking showing the largest gaps.',
+    why:['No time frame → <b>comparison language only</b> (no "rose/fell").','<b>Overview</b> names the biggest differences without listing every number.','Grouped by who does more: <i>men first, then women</i>.','Strong comparison structures: <i>four times the figure, more than double, the most time overall</i>.']
+  }
+};
+let currentTask='A';
+function showTask(k){
+  currentTask=k;
+  $('taskA').className='btn'+(k==='A'?'':' ghost');
+  $('taskB').className='btn'+(k==='B'?'':' ghost');
+  $('rubric').innerHTML=TASKS[k].rubric;
+  $('taskChart').innerHTML=TASKS[k].chart();
+  $('modelBox').classList.remove('show');
+  $('writeFb').classList.remove('show');
+  clearEssay();
+  document.querySelectorAll('#write .checkitem input').forEach(c=>c.checked=false);
+}
+function countWords(){
+  const w=$('essay').value.trim().split(/\s+/).filter(Boolean).length;
+  const el=$('wc');el.textContent=w;el.classList.toggle('ok',w>=150);
+}
+function clearEssay(){$('essay').value='';countWords();}
+function finishWriting(){
+  const w=$('essay').value.trim().split(/\s+/).filter(Boolean).length;
+  const fb=$('writeFb');
+  if(w<40){
+    fb.className='feedback show no';
+    fb.innerHTML='✍️ Have a go first! Write your own attempt (aim for 150+ words), then unlock the model to compare.';
+    return;
+  }
+  const t=TASKS[currentTask];
+  $('modelBox').innerHTML='<h3 style="margin-top:0">🎓 Model Answer ('+(t.model.trim().split(/\s+/).length)+' words)</h3>'+
+    t.model.split('\n\n').map(p=>'<p>'+p+'</p>').join('')+
+    '<div class="why"><b>Why it works:</b><ul style="margin:6px 0 0;padding-left:18px">'+t.why.map(x=>'<li style="margin-bottom:4px">'+x+'</li>').join('')+'</ul></div>'+
+    '<p class="note">Compare it with your own answer — did you include an introduction, an overview, and two grouped paragraphs?</p>';
+  $('modelBox').classList.add('show');
+  fb.className='feedback show ok';
+  fb.innerHTML='✅ Great — you wrote <b>'+w+' words</b>! '+(w>=150?'That meets the minimum. ':'A little short of 150 — try to add more next time. ')+'You earned <b>+20 ⭐</b>. Now compare with the model below.';
+  addPoints(20);
+  if(w>=150) burst();
+  $('modelBox').scrollIntoView({behavior:'smooth'});
+}
+
+/* ================= QUIZ ================= */
+const QUIZ=[
+  {q:'How many minutes should you spend on Task 1?',o:['10 minutes','20 minutes','40 minutes'],c:1},
+  {q:'What is the minimum word count for Task 1?',o:['100 words','150 words','250 words'],c:1},
+  {q:'Should you give your opinion in Task 1?',o:['Yes, always','No — it is a factual report','Only in the conclusion'],c:1},
+  {q:'Which of these is NOT a Task 1 visual?',o:['Pie chart','Process diagram','Argument essay'],c:2},
+  {q:'"The number of cars ___ sharply." Choose the best verb.',o:['stood','dropped','remained'],c:1},
+  {q:'A good paraphrase of "shows" is…',o:['illustrates','agrees','wants'],c:0},
+  {q:'A bar chart with NO dates uses which language?',o:['Language of change','Language of comparison','Passive voice'],c:1},
+  {q:'Pie charts always show…',o:['percentages / proportions','processes','locations'],c:0},
+  {q:'Process diagrams are usually written in the…',o:['active voice','passive voice','future tense'],c:1},
+  {q:'"75%" is roughly which fraction?',o:['a third','three-quarters','a quarter'],c:1},
+  {q:'To reach Band 6 in Task Achievement you MUST include…',o:['a personal opinion','an overview','exact statistics for every point'],c:1},
+  {q:'Which word describes location on a map?',o:['steadily','opposite','dramatically'],c:1},
+  {q:'Which adverb means "a little / a small amount"?',o:['sharply','slightly','rapidly'],c:1},
+  {q:'"The figure peaked at 90" means it…',o:['stayed flat at 90','reached its highest point of 90','fell to 90'],c:1},
+  {q:'For a graph showing a FINISHED period in the past, use…',o:['present simple','past simple','future tense'],c:1},
+  {q:'"2015 ___ a steady rise in sales." Choose the verb.',o:['saw','in saw','was seeing in'],c:0}
+];
+let quizSel={};
+function renderQuiz(){quizSel={};$('quizBox').innerHTML=QUIZ.map((item,i)=>'<div class="q" id="q'+i+'"><div class="qtext">'+(i+1)+'. '+item.q+'</div>'+item.o.map((o,j)=>'<button class="opt" onclick="selQuiz('+i+','+j+')">'+o+'</button>').join('')+'</div>').join('');$('quizResult').classList.remove('show');$('cert').classList.remove('show');$('submitQuiz').disabled=false;updateBar();}
+function selQuiz(i,j){if($('quizResult').classList.contains('show'))return;quizSel[i]=j;$('q'+i).querySelectorAll('.opt').forEach((o,k)=>o.classList.toggle('sel',k===j));updateBar();}
+function updateBar(){$('quizBar').style.width=Math.round(Object.keys(quizSel).length/QUIZ.length*100)+'%';}
+function submitQuiz(){let correct=0;QUIZ.forEach((item,i)=>{const opts=$('q'+i).querySelectorAll('.opt');opts.forEach(o=>o.disabled=true);if(quizSel[i]===item.c){opts[item.c].classList.add('correct');correct++;}else{if(quizSel[i]!==undefined)opts[quizSel[i]].classList.add('incorrect');opts[item.c].classList.add('correct');}});const pct=Math.round(correct/QUIZ.length*100);addPoints(correct*3);$('submitQuiz').disabled=true;const res=$('quizResult');res.classList.add('show');$('scoreNum').textContent=pct+'%';$('scoreMsg').textContent='You got '+correct+' of '+QUIZ.length+' correct.';const badges=[];if(pct>=50)badges.push({i:'🌱',t:'Getting Started'});if(pct>=80)badges.push({i:'🥈',t:'Task 1 Achiever'});if(pct>=94)badges.push({i:'🏆',t:'Task 1 Master'});if(state.points>=120)badges.push({i:'⭐',t:'Point Collector'});$('badges').innerHTML=badges.map(b=>'<div class="badge"><span class="bi">'+b.i+'</span><small>'+b.t+'</small></div>').join('');if(pct>=80){$('certArea').innerHTML='<p style="font-weight:700;color:var(--good)">🎉 You passed! Generate your certificate:</p><input class="txt" id="nameInput" placeholder="Type your name…" style="max-width:300px"><div class="btnrow"><button class="btn coral" onclick="makeCert('+pct+')">🎓 Get my certificate</button></div>';burst();}else{$('certArea').innerHTML='<p style="font-weight:700;color:var(--accent-dark)">Almost there — you need 80% for the certificate. Review the tabs and try again!</p>';}res.scrollIntoView({behavior:'smooth'});}
+function makeCert(pct){const name=($('nameInput').value||'Student').trim();state.name=name;$('certName').textContent=name;$('certScore').textContent='Score: '+pct+'%  ·  '+state.points+' ⭐ points earned';$('cert').classList.add('show');$('cert').scrollIntoView({behavior:'smooth'});burst();}
+function resetQuiz(){renderQuiz();window.scrollTo({top:$('quiz').offsetTop,behavior:'smooth'});}
+
+/* ================= SAVE / LOAD ================= */
+function saveProgress(){const data=JSON.stringify({points:state.points,name:state.name,date:new Date().toISOString()},null,2);const blob=new Blob([data],{type:'application/json'});const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='ielts-task1-progress.json';a.click();}
+function loadProgress(e){const f=e.target.files[0];if(!f)return;const r=new FileReader();r.onload=ev=>{try{const d=JSON.parse(ev.target.result);if(typeof d.points==='number'){state.points=d.points;$('pts').textContent=state.points;}if(d.name)state.name=d.name;alert('✅ Progress loaded! Points restored: '+state.points);}catch(err){alert('Could not read that file.');}};r.readAsText(f);}
+
+/* ================= CONFETTI ================= */
+function burst(){const colors=['#7c3aed','#ec4899','#fbbf24','#c4b5fd','#db2777'];for(let i=0;i<60;i++){const c=document.createElement('div');c.className='confetti';c.style.left=Math.random()*100+'vw';c.style.background=colors[Math.floor(Math.random()*colors.length)];c.style.transform='rotate('+Math.random()*360+'deg)';document.body.appendChild(c);const dur=2+Math.random()*1.5,drift=(Math.random()-.5)*200;c.animate([{transform:'translate(0,0) rotate(0)',opacity:1},{transform:'translate('+drift+'px,105vh) rotate('+720*Math.random()+'deg)',opacity:.9}],{duration:dur*1000,easing:'cubic-bezier(.2,.6,.4,1)'});setTimeout(()=>c.remove(),dur*1000);}}
+
+/* ================= INIT ================= */
+loadBuild();loadTransform();renderPassive();renderQuiz();renderMiniCharts();showTask('A');
+</script>
+</body>
+</html>
